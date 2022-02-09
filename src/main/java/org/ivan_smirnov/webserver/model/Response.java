@@ -1,7 +1,6 @@
 package org.ivan_smirnov.webserver.model;
 
 import java.io.BufferedReader;
-import java.io.Reader;
 import java.util.Map;
 
 public class Response {
