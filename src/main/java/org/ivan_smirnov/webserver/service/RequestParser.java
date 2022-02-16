@@ -21,12 +21,10 @@ public class RequestParser {
         try {
             injectUriHttpMethod(reader, request);
             injectHeaders(reader, request);
+            return request;
         } catch (Exception e) {
-            BadRequestException badRequestException = new BadRequestException();
-            badRequestException.addSuppressed(e);
-            throw badRequestException;
+            throw new BadRequestException(e);
         }
-        return request;
     }
 
     private void injectUriHttpMethod(BufferedReader reader, Request request) throws IOException {
@@ -38,11 +36,10 @@ public class RequestParser {
 
     private void injectHeaders(BufferedReader reader, Request request) throws IOException {
         Map<String, String> headerParams = new HashMap<>();
-        String line = reader.readLine();
-        while (!line.isEmpty()) {
+        String line;
+        while (!(line = reader.readLine()).isEmpty()) {
             String[] array = line.split(HEADER_SEPARATOR);
             headerParams.put(array[0], array[1]);
-            line = reader.readLine();
         }
         request.setHeaders(headerParams);
     }

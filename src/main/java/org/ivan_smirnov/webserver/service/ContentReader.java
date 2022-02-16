@@ -4,7 +4,7 @@ import java.io.*;
 
 public class ContentReader implements Closeable {
     private final String webAppPath;
-    BufferedReader reader;
+    private BufferedReader reader;
 
     public ContentReader(String webAppPath) {
         this.webAppPath = webAppPath;
